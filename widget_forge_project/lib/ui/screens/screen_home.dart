@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:widget_forge_project/app/app_routes.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -72,15 +73,11 @@ final List<_WidgetTypeButton> buttonsList = [
   _WidgetTypeButton(
       text: 'Cards',
       icon: Icons.credit_card_rounded,
-      onPressed: (){
-
-      }
   ),
 
   _WidgetTypeButton(
       text: 'Buttons',
       icon: Icons.smart_button,
-      onPressed: (){}
   ),
 
 
@@ -88,16 +85,17 @@ final List<_WidgetTypeButton> buttonsList = [
 
 
 class _WidgetTypeButton extends StatelessWidget {
-  const _WidgetTypeButton({required this.text, required this.icon, required this.onPressed});
+  const _WidgetTypeButton({required this.text, required this.icon});
 
   final String text;
   final IconData icon;
-  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPressed,
+      onPressed: (){
+        Navigator.of(context).pushNamed(AppRoutes.widgetCategoryScreen);
+      },
       style: ButtonStyle(
         backgroundColor: WidgetStatePropertyAll(Colors.black12),
         shape: WidgetStatePropertyAll(

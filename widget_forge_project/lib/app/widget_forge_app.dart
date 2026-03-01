@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:widget_forge_project/screens/screen_home.dart';
+import 'package:widget_forge_project/app/app_routes.dart';
 
 class WidgetForgeApp extends StatelessWidget {
   const WidgetForgeApp({super.key});
@@ -8,7 +8,9 @@ class WidgetForgeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Widget Forge App',
-      home: const HomeScreen(),
+      initialRoute: AppRoutes.homeScreen,
+      onGenerateRoute: (route) => AppRoutes.fromRoute(route.name),
+
     );
   }
 }
