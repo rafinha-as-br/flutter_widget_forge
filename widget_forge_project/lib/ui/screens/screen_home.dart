@@ -53,9 +53,9 @@ class HomeScreen extends StatelessWidget {
                   mainAxisSpacing: 8,
                 ),
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: buttonsList.length,
+                itemCount: _buttonsList.length,
                 itemBuilder: (context, index) {
-                  final button = buttonsList[index];
+                  final button = _buttonsList[index];
                   return button;
                 },
               ),
@@ -69,7 +69,7 @@ class HomeScreen extends StatelessWidget {
 }
 
 
-final List<_WidgetTypeButton> buttonsList = [
+final List<_WidgetTypeButton> _buttonsList = [
   _WidgetTypeButton(
       text: 'Cards',
       icon: Icons.credit_card_rounded,
