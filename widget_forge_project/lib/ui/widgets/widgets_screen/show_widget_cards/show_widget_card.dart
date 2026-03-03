@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+
+/* This is the default card made up for testing the screen*/
+
 class ShowWidgetCard extends StatelessWidget {
   const ShowWidgetCard({super.key});
 

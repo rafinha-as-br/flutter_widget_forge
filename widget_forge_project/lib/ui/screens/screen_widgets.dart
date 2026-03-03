@@ -4,7 +4,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:widget_forge_project/ui/widgets/widgets_screen/show_widget_card.dart';
+import 'package:widget_forge_project/ui/widgets/widgets_screen/show_widget_cards/show_button_card.dart';
+import 'package:widget_forge_project/ui/widgets/widgets_screen/show_widget_cards/show_widget_card.dart';
 import 'package:widget_forge_project/ui/widgets/widgets_screen/sliver_app_bar.dart';
 
 class WidgetsScreen extends StatelessWidget {
@@ -23,7 +24,7 @@ class WidgetsScreen extends StatelessWidget {
                   (context, index){
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ShowWidgetCard(),
+                      child: ShowButtonCard(),
                     );
                   },
                   childCount: 2,
