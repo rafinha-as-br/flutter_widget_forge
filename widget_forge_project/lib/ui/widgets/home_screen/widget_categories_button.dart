@@ -39,7 +39,6 @@ class WidgetCategoryButton extends StatelessWidget {
         child: Stack(
           alignment: AlignmentGeometry.center,
           children: [
-            // Overlay escuro para contraste
             Positioned.fill(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
@@ -49,13 +48,12 @@ class WidgetCategoryButton extends StatelessWidget {
                     sigmaY: 1.5,
                   ),
                   child: Container(
-                    color: Colors.black.withAlpha(100), // controla contraste
+                    color: Colors.black.withAlpha(100),
                   ),
                 ),
               ),
             ),
 
-            // Conteúdo
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -64,7 +62,7 @@ class WidgetCategoryButton extends StatelessWidget {
 
                 Icon(
                   icon,
-                  size: 70,
+                  size: 70, /// todo: lower the size a bit...
                   color: Colors.white,
                 ),
                 Text(
