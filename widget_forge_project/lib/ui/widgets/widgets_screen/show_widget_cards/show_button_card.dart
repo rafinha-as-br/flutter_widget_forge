@@ -2,8 +2,18 @@
 
 import 'package:flutter/material.dart';
 
+enum ButtonState{
+  normal,
+  pressed,
+  disabled
+}
+
 class ShowButtonCard extends StatelessWidget {
   const ShowButtonCard({super.key});
+
+
+  /// Todo: Call the ButtonCategory entity here!
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +56,8 @@ class _ShowButtonCardHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 6,
       children: [
-
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -62,42 +72,7 @@ class _ShowButtonCardHeader extends StatelessWidget {
             ),
 
             /// State buttons
-            Row(
-              spacing: 6,
-              children: [
-
-                /// Radio button active
-                _ToggleActiveButton(),
-
-                /// radio button disabled
-                InkWell(
-                  onTap: (){
-                    /// todo: Place this button on a separated file
-                    /// todo: Call the change state method here (maybe create a sharedState on a provider?)
-                  },
-                  borderRadius: BorderRadius.circular(12),
-                  child: Container(
-                    width: 50,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.grey,
-                        width: 2.3,
-                      ),
-                      color:  Colors.transparent,
-                    ),
-                    child: Icon(
-                      Icons.block,
-                      size: 20,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-
-
-              ],
-            ),
+            _StateButtons()
 
           ],
         ),
@@ -117,44 +92,92 @@ class _ShowButtonCardHeader extends StatelessWidget {
 }
 
 
-class _ToggleActiveButton extends StatelessWidget {
-  const _ToggleActiveButton({super.key});
+class _StateButtons extends StatefulWidget {
+  const _StateButtons({super.key});
+
+  @override
+  State<_StateButtons> createState() => _StateButtonsState();
+}
+
+class _StateButtonsState extends State<_StateButtons> {
+
+  ButtonState buttonState = ButtonState.normal;
+
+  @override
+  void initState() {
+    super.initState();
+    buttonState = ButtonState.normal;
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (){
-        /// todo: Place this button on a separated file
-        /// todo: Call the change state method here (maybe create a sharedState on a provider?)
-      },
-      borderRadius: BorderRadius.circular(50),
-      child: Container(
-        width: 40,
-        height: 40,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: Colors.grey,
-            width: 2.3,
+    return RadioGroup<ButtonState>(
+        onChanged: (state){
+          setState(() {
+            buttonState = state!;
+          });
+        },
+        groupValue: buttonState,
+        child: Row(
+          spacing: 5,
+        children: [
+
+          /// normal ButtonState
+          _radioButton(ButtonState.normal, Icons.check),
+
+          /// pressed ButtonState
+          _radioButton(ButtonState.pressed, Icons.touch_app_outlined),
+
+          /// Disabled ButtonState
+          _radioButton(ButtonState.disabled, Icons.do_not_touch)
+
+
+      ],
+    ));
+  }
+
+  Widget _radioButton(ButtonState state, IconData icon){
+    return Stack(
+      children: [
+        Positioned(
+            top: 5,
+            bottom: 5,
+            right: 5,
+            left: 5,
+            child: Icon(
+              icon,
+              size: 20,
+              color: buttonState == state? Colors.white : Colors.black12,
+            )
+        ),
+        Transform.scale(
+          scale: 2,
+          child: Radio(
+            value: state,
+            innerRadius: WidgetStatePropertyAll(0),
+            fillColor: WidgetStateProperty<Color?>.fromMap(
+              <WidgetStatesConstraint, Color?>
+              {
+                WidgetState.selected: Colors.white,
+                WidgetState.any: Colors.black12,
+              }
+            ),
+
           ),
-          color:  Colors.transparent,
         ),
-        child: Icon(
-          Icons.check_circle_outline_outlined,
-          size: 20,
-          color: Colors.grey,
-        ),
-      ),
+      ],
     );
   }
-}
 
+} /// Todo: Change the radio value from enum to the WidgetStatesController of the object
 
 
 
 
 /* mock data */
 final _buttonExample = ElevatedButton(
+  statesController: WidgetStatesController(),
   onPressed: () {
 
   },
