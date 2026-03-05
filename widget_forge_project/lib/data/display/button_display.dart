@@ -1,21 +1,18 @@
-/* this card is made up for showing ElevatedButtons */
-
 import 'package:flutter/material.dart';
 
-enum ButtonState{
-  normal,
-  pressed,
-  disabled
-}
+class ButtonDisplayerCard extends StatelessWidget {
+  const ButtonDisplayerCard({
+    super.key,
+    required this.buttonName,
+    required this.buttonDescription,
+    required this.buttonController,
+    required this.buttonWidget,
+  });
 
-class ShowButtonCard extends StatelessWidget {
-  const ShowButtonCard({super.key});
-
-
-
-
-  /// Todo: Call the ButtonCategory entity here!
-
+  final String buttonName;
+  final String buttonDescription;
+  final WidgetStatesController buttonController;
+  final Widget buttonWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +29,12 @@ class ShowButtonCard extends StatelessWidget {
           children: [
 
             /// header
-            _ShowButtonCardHeader(),
+            _ShowButtonCardHeader(buttonName: buttonName, buttonDescription: buttonDescription,),
 
             // the widget itself
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: _buttonExample, /// todo: Call the widget on the constructor
+              child: buttonWidget,
             )
 
 
@@ -52,10 +49,15 @@ class ShowButtonCard extends StatelessWidget {
 }
 
 class _ShowButtonCardHeader extends StatelessWidget {
-  const _ShowButtonCardHeader({required this.buttonName, required this.buttonDescription});
+  const _ShowButtonCardHeader({
+    required this.buttonName,
+    required this.buttonDescription,
+    required this.buttonController,
+  });
 
   final String buttonName;
   final String buttonDescription;
+  final WidgetStatesController buttonController;
 
   @override
   Widget build(BuildContext context) {
@@ -126,20 +128,20 @@ class _StateButtonsState extends State<_StateButtons> {
         groupValue: buttonState,
         child: Row(
           spacing: 5,
-        children: [
+          children: [
 
-          /// normal ButtonState
-          _radioButton(ButtonState.normal, Icons.check),
+            /// normal ButtonState
+            _radioButton(ButtonState.normal, Icons.check),
 
-          /// pressed ButtonState
-          _radioButton(ButtonState.pressed, Icons.touch_app_outlined),
+            /// pressed ButtonState
+            _radioButton(ButtonState.pressed, Icons.touch_app_outlined),
 
-          /// Disabled ButtonState
-          _radioButton(ButtonState.disabled, Icons.do_not_touch)
+            /// Disabled ButtonState
+            _radioButton(ButtonState.disabled, Icons.do_not_touch)
 
 
-      ],
-    ));
+          ],
+        ));
   }
 
   Widget _radioButton(ButtonState state, IconData icon){
@@ -162,11 +164,11 @@ class _StateButtonsState extends State<_StateButtons> {
             value: state,
             innerRadius: WidgetStatePropertyAll(0),
             fillColor: WidgetStateProperty<Color?>.fromMap(
-              <WidgetStatesConstraint, Color?>
-              {
-                WidgetState.selected: Colors.white,
-                WidgetState.any: Colors.black12,
-              }
+                <WidgetStatesConstraint, Color?>
+                {
+                  WidgetState.selected: Colors.white,
+                  WidgetState.any: Colors.black12,
+                }
             ),
 
           ),
@@ -176,36 +178,3 @@ class _StateButtonsState extends State<_StateButtons> {
   }
 
 } /// Todo: Change the radio value from enum to the WidgetStatesController of the object
-
-
-
-
-/* mock data */
-final _buttonExample = ElevatedButton(
-  statesController: WidgetStatesController(),
-  onPressed: () {
-
-  },
-  style: ElevatedButton.styleFrom(
-    backgroundColor: Colors.blue,
-    foregroundColor: Colors.white,
-    padding: const EdgeInsets.symmetric(
-      horizontal: 24,
-      vertical: 12,
-    ),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(8),
-    ),
-    elevation: 4,
-  ),
-  child: const Text(
-    "Botão exemplo",
-    style: TextStyle(
-      fontSize: 16,
-      fontWeight: FontWeight.w600,
-    ),
-  ),
-);
-final _buttonDescription = 'O Elevated Button é um botão com elevação que expressa maior ênfase e hierarquia visual na interface. Sua sombra característica cria uma sensação de profundidade, indicando que o elemento é interativo e importante.';
-final _buttonName = 'Botão sólido 1';
-

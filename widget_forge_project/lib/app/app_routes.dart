@@ -1,6 +1,7 @@
 /* this file contains the routes for the app */
 
 import 'package:flutter/material.dart';
+import 'package:widget_forge_project/data/entities/item.dart';
 import 'package:widget_forge_project/ui/screens/screen_widgets.dart';
 
 import '../ui/screens/screen_home.dart';
@@ -20,25 +21,27 @@ abstract class AppRoutes {
 
 
   /// route mapper
-  static Route<dynamic> fromRoute(String? route){
-    switch(route){
+  static Route<dynamic> fromRoute(RouteSettings settings){
+    switch(settings.name){
       case homeScreen :
         return MaterialPageRoute(
-          settings: const RouteSettings(name: homeScreen),
+          settings: settings,
             builder: (_) => const HomeScreen()
         );
       case widgetCategoryScreen:
         return MaterialPageRoute(
-            settings: const RouteSettings(name: widgetCategoryScreen),
+            settings: settings,
             builder: (_) => const WidgetCategoryScreen()
         );
       case widgetsScreen:
+        final itemsList = settings.arguments as List<Item>;
+
         return MaterialPageRoute(
-            settings: const RouteSettings(name: widgetsScreen),
-            builder: (_) => const WidgetsScreen()
+            settings: settings,
+            builder: (_) => WidgetsScreen(itemsList: itemsList,)
         );
 
-      default: throw UnsupportedError('UnkownRoute: $route');
+      default: throw UnsupportedError('UnkownRoute: ${settings.name}');
     }
   }
 

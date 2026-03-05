@@ -41,4 +41,14 @@ class WidgetCategoryScreen extends StatelessWidget {
 }
 
 
+/* Future Updates:
+* - Replace the Column for a CustomScrollView
+* - Create a customAppBar (like the screen_widgets appBar)
+* - call the List of CategoryItem on the constructor
+* - Make a switch case to get the correct WidgetType
+*
+*
+* */
+
+
 

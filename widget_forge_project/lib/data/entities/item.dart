@@ -1,12 +1,22 @@
 /* this is the main entity, responsible for keeping the Widget model and details data*/
 
-import 'package:flutter/widgets.dart';
 
-class Item {
+import 'package:flutter/cupertino.dart';
 
-  final String name;
+abstract class Item {
+
+  final String itemName;
   final String description;
-  final Widget widget;
 
-  Item({required this.name, required this.description, required this.widget});
+  Item({required this.itemName, required this.description});
+}
+
+abstract class ButtonItem extends Item{
+  final WidgetStatesController buttonController;
+
+  ButtonItem({
+    required super.itemName,
+    required super.description,
+    required this.buttonController,
+  });
 }

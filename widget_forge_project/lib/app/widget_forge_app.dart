@@ -9,7 +9,7 @@ class WidgetForgeApp extends StatelessWidget {
     return MaterialApp(
       title: 'Widget Forge App',
       initialRoute: AppRoutes.homeScreen,
-      onGenerateRoute: (route) => AppRoutes.fromRoute(route.name),
+      onGenerateRoute: (route) => AppRoutes.fromRoute(route),
 
     );
   }

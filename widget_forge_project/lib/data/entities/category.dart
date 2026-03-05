@@ -1,11 +1,15 @@
 /* the category entity holds the name, description and the list of Objects  */
 
-import 'item.dart';
+import 'package:widget_forge_project/data/entities/type.dart';
 
 class ItemCategory{
   final String name;
   final String description;
-  final List<Item> widgets;
+  final List<ItemType> types;
 
-  ItemCategory(this.name, this.description, this.widgets);
+  ItemCategory({
+    required this.name,
+    required this.description,
+    required this.types
+  });
 }

@@ -1,15 +1,15 @@
 /* this screen is responsible for showing the widgets from a selected
 * widget category */
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:widget_forge_project/data/entities/item.dart';
 import 'package:widget_forge_project/ui/widgets/widgets_screen/show_widget_cards/show_button_card.dart';
-import 'package:widget_forge_project/ui/widgets/widgets_screen/show_widget_cards/show_widget_card.dart';
 import 'package:widget_forge_project/ui/widgets/widgets_screen/sliver_app_bar.dart';
 
 class WidgetsScreen extends StatelessWidget {
-  const WidgetsScreen({super.key});
+  const WidgetsScreen({super.key, required this.itemsList});
+
+  final List<Item> itemsList;
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +18,17 @@ class WidgetsScreen extends StatelessWidget {
         slivers: [
           WidgetsScreenAppBar(),
 
-          /// Todo: Place the SliverList here with the ShowWidgetCard()
           SliverList(
               delegate: SliverChildBuilderDelegate(
                   (context, index){
+                    final item = itemsList[index];
+
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: ShowButtonCard(),
                     );
                   },
-                  childCount: 2,
+                  childCount: itemsList.length,
               ),
           )
 
@@ -37,3 +38,10 @@ class WidgetsScreen extends StatelessWidget {
   }
 }
 
+/* future updates:
+*
+* - Need to create a widget that checks what Category of Item is and return the
+* Specific card for it
+* - Rename the screens from widget to items
+*
+* */
