@@ -1,26 +1,23 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:widget_forge_project/data/entities/category.dart';
 
 import '../../../app/app_routes.dart';
 
 class WidgetCategoryButton extends StatelessWidget {
-  const WidgetCategoryButton({
-    super.key,
-    required this.text,
-    required this.icon,
-    required this.imagePath,
-  });
+  const WidgetCategoryButton({super.key, required this.category,});
 
-  final String text;
-  final IconData icon;
-  final String imagePath;
+  final ItemCategory category;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.of(context).pushNamed(AppRoutes.widgetCategoryScreen);
+        Navigator.of(context).pushNamed(
+            AppRoutes.widgetCategoryScreen,
+          arguments: category
+        );
       },
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.zero,
@@ -32,7 +29,7 @@ class WidgetCategoryButton extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           image: DecorationImage(
-            image: AssetImage(imagePath),
+            image: AssetImage(category.backgroundImage ?? ''),
             fit: BoxFit.cover,
           ),
         ),
@@ -61,12 +58,12 @@ class WidgetCategoryButton extends StatelessWidget {
 
 
                 Icon(
-                  icon,
+                  category.categoryIcon,
                   size: 70, /// todo: lower the size a bit...
                   color: Colors.white,
                 ),
                 Text(
-                  text,
+                  category.name,
                   style: const TextStyle(
                     fontSize: 20,
                     color: Colors.white,

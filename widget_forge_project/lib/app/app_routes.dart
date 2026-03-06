@@ -1,6 +1,8 @@
 /* this file contains the routes for the app */
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:widget_forge_project/data/entities/category.dart';
 import 'package:widget_forge_project/data/entities/item.dart';
 import 'package:widget_forge_project/ui/screens/screen_widgets.dart';
 
@@ -29,9 +31,11 @@ abstract class AppRoutes {
             builder: (_) => const HomeScreen()
         );
       case widgetCategoryScreen:
+        final category = settings.arguments as ItemCategory;
+
         return MaterialPageRoute(
             settings: settings,
-            builder: (_) => const WidgetCategoryScreen()
+            builder: (_) => WidgetCategoryScreen(category: category,)
         );
       case widgetsScreen:
         final itemsList = settings.arguments as List<Item>;

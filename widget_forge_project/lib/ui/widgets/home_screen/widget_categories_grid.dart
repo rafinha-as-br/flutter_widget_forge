@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:widget_forge_project/data/widget_menu.dart';
+import 'package:widget_forge_project/ui/widgets/home_screen/widget_categories_button.dart';
 
 class WidgetCategoriesGrid extends StatelessWidget {
-  const WidgetCategoriesGrid({super.key, required this.buttonsList});
-
-  final List<Widget> buttonsList;
+  const WidgetCategoriesGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +14,11 @@ class WidgetCategoriesGrid extends StatelessWidget {
         mainAxisSpacing: 8,
       ),
       physics: NeverScrollableScrollPhysics(),
-      itemCount: buttonsList.length,
+      itemCount: categories.length,
       itemBuilder: (context, index) {
-        final button = buttonsList[index];
+        final category = categories[index];
+        final button = WidgetCategoryButton(category: category);
+
         return button;
       },
     );

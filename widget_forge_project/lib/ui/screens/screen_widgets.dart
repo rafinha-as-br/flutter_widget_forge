@@ -3,8 +3,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:widget_forge_project/data/entities/item.dart';
-import 'package:widget_forge_project/ui/widgets/widgets_screen/show_widget_cards/show_button_card.dart';
 import 'package:widget_forge_project/ui/widgets/widgets_screen/sliver_app_bar.dart';
+
+/// Todo: Need to do all the things on the future updates list
 
 class WidgetsScreen extends StatelessWidget {
   const WidgetsScreen({super.key, required this.itemsList});
@@ -25,7 +26,7 @@ class WidgetsScreen extends StatelessWidget {
 
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ShowButtonCard(),
+                      child: item,
                     );
                   },
                   childCount: itemsList.length,

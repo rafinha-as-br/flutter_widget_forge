@@ -1,21 +1,26 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:widget_forge_project/data/entities/type.dart';
 
 import '../../../app/app_routes.dart';
 
-class WidgetTypeButton extends StatelessWidget {
-  const WidgetTypeButton({required this.text, required this.icon, required this.imagePath});
+/// Todo: need to refactor this widget, break into small pieces for future updates
 
-  final String text;
-  final IconData icon;
-  final String imagePath;
+class WidgetTypeButton extends StatelessWidget {
+  const WidgetTypeButton({super.key, required this.type});
+
+  final ItemType type;
+
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        Navigator.of(context).pushNamed(AppRoutes.widgetsScreen);
+        Navigator.of(context).pushNamed(
+            AppRoutes.widgetsScreen,
+          arguments: type.items
+        );
       },
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.zero,
@@ -27,7 +32,7 @@ class WidgetTypeButton extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           image: DecorationImage(
-            image: AssetImage(imagePath),
+            image: AssetImage(type.typeBackgroundImage ?? ''),
             fit: BoxFit.cover,
           ),
         ),
@@ -63,12 +68,12 @@ class WidgetTypeButton extends StatelessWidget {
                       children: [
                         const SizedBox(),
                         Icon(
-                          icon,
+                          type.typeIcon,
                           size: 70,
                           color: Colors.white,
                         ),
                         Text(
-                          text,
+                          type.typeName,
                           style: const TextStyle(
                             fontSize: 20,
                             color: Colors.white,
@@ -85,7 +90,7 @@ class WidgetTypeButton extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
-                      'Botões com fundo sólido, ideal para ações primárias',
+                      type.typeDescription,
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,

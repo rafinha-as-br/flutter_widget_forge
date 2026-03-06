@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// Todo: Need to refactor this Card, maybe try to do an implement or extends of ButtonItemType!
+
+
 class ButtonDisplayerCard extends StatelessWidget {
   const ButtonDisplayerCard({
     super.key,
@@ -29,7 +32,7 @@ class ButtonDisplayerCard extends StatelessWidget {
           children: [
 
             /// header
-            _ShowButtonCardHeader(buttonName: buttonName, buttonDescription: buttonDescription,),
+            _ShowButtonCardHeader(buttonName: buttonName, buttonDescription: buttonDescription, buttonController: buttonController,),
 
             // the widget itself
             Padding(
@@ -79,7 +82,7 @@ class _ShowButtonCardHeader extends StatelessWidget {
             ),
 
             /// State buttons
-            _StateButtons()
+            _StateButtons(buttonController: buttonController,)
 
           ],
         ),
@@ -100,7 +103,9 @@ class _ShowButtonCardHeader extends StatelessWidget {
 
 
 class _StateButtons extends StatefulWidget {
-  const _StateButtons({super.key});
+  const _StateButtons({required this.buttonController});
+
+  final WidgetStatesController buttonController;
 
   @override
   State<_StateButtons> createState() => _StateButtonsState();
@@ -108,21 +113,37 @@ class _StateButtons extends StatefulWidget {
 
 class _StateButtonsState extends State<_StateButtons> {
 
-  ButtonState buttonState = ButtonState.normal;
+  late _ButtonState buttonState;
 
   @override
   void initState() {
     super.initState();
-    buttonState = ButtonState.normal;
+    buttonState = _ButtonState.normal;
+
   }
 
 
   @override
   Widget build(BuildContext context) {
-    return RadioGroup<ButtonState>(
+    return RadioGroup<_ButtonState>(
         onChanged: (state){
           setState(() {
-            buttonState = state!;
+            switch(state){
+              case _ButtonState.normal :
+                buttonState = state!;
+                widget.buttonController.update(WidgetState.disabled, false);
+                widget.buttonController.update(WidgetState.pressed, false);
+              case _ButtonState.pressed:
+                buttonState = state!;
+                widget.buttonController.update(WidgetState.disabled, false);
+                widget.buttonController.update(WidgetState.pressed, true);
+              case _ButtonState.disabled:
+                buttonState = state!;
+                widget.buttonController.update(WidgetState.disabled, true);
+                widget.buttonController.update(WidgetState.pressed, false);
+              default:
+            }
+
           });
         },
         groupValue: buttonState,
@@ -131,20 +152,21 @@ class _StateButtonsState extends State<_StateButtons> {
           children: [
 
             /// normal ButtonState
-            _radioButton(ButtonState.normal, Icons.check),
+            _radioButton(_ButtonState.normal, Icons.check),
 
             /// pressed ButtonState
-            _radioButton(ButtonState.pressed, Icons.touch_app_outlined),
+            _radioButton(_ButtonState.pressed, Icons.touch_app_outlined),
 
             /// Disabled ButtonState
-            _radioButton(ButtonState.disabled, Icons.do_not_touch)
+            _radioButton(_ButtonState.disabled, Icons.do_not_touch)
 
 
           ],
         ));
   }
 
-  Widget _radioButton(ButtonState state, IconData icon){
+
+  Widget _radioButton(_ButtonState state, IconData icon){
     return Stack(
       children: [
         Positioned(
@@ -177,4 +199,12 @@ class _StateButtonsState extends State<_StateButtons> {
     );
   }
 
-} /// Todo: Change the radio value from enum to the WidgetStatesController of the object
+
+
+}
+
+enum _ButtonState{
+  normal,
+  pressed,
+  disabled
+}

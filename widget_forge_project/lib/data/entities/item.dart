@@ -3,18 +3,19 @@
 
 import 'package:flutter/cupertino.dart';
 
-abstract class Item {
+abstract class Item extends Widget{
 
   final String itemName;
   final String description;
 
-  Item({required this.itemName, required this.description});
+  const Item({super.key, required this.itemName, required this.description});
 }
 
 abstract class ButtonItem extends Item{
   final WidgetStatesController buttonController;
 
-  ButtonItem({
+  const ButtonItem({
+    super.key,
     required super.itemName,
     required super.description,
     required this.buttonController,

@@ -28,7 +28,6 @@ class _TestButtonState extends State<TestButton> {
 
   @override
   void dispose() {
-    widget.buttonController.dispose();
     super.dispose();
   }
 
