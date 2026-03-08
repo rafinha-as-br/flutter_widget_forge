@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:widget_forge_project/data/entities/item.dart';
+import 'package:widget_forge_project/ui/theme/app_decorations.dart';
 
 class TestButton extends StatefulWidget implements ButtonItem{
   TestButton({super.key});
@@ -55,7 +56,7 @@ class _Button extends StatelessWidget {
           vertical: 12,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: AppDecorations.borderRadiusSmall,
         ),
         elevation: 4,
       ),

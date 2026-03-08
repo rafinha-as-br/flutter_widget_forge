@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:widget_forge_project/ui/theme/app_decorations.dart';
 
 class ItemCategoryDescriptionCard extends StatelessWidget {
   const ItemCategoryDescriptionCard({super.key, required this.name, required this.description});
@@ -11,10 +12,10 @@ class ItemCategoryDescriptionCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
-          borderRadius: BorderRadius.circular(15)
+          borderRadius: AppDecorations.borderRadiusLarge
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 17),
+        padding: AppDecorations.paddingCard,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

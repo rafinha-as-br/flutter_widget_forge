@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:widget_forge_project/ui/theme/app_decorations.dart';
 
 /// Todo: Need to refactor this Card, maybe try to do an implement or extends of ButtonItemType!
 
@@ -22,7 +23,7 @@ class ButtonDisplayerCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(12)
+          borderRadius: AppDecorations.borderRadiusDefault
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
@@ -36,7 +37,7 @@ class ButtonDisplayerCard extends StatelessWidget {
 
             // the widget itself
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: AppDecorations.paddingDefault,
               child: buttonWidget,
             )
 

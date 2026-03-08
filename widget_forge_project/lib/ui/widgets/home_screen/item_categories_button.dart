@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:widget_forge_project/data/entities/category.dart';
+import 'package:widget_forge_project/ui/theme/app_decorations.dart';
 
 import '../../../app/app_routes.dart';
 
@@ -22,12 +23,12 @@ class ItemCategoryButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: AppDecorations.borderRadiusDefault,
         ),
       ),
       child: Ink(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: AppDecorations.borderRadiusDefault,
           image: DecorationImage(
             image: AssetImage(category.backgroundImage ?? ''),
             fit: BoxFit.cover,
@@ -38,7 +39,7 @@ class ItemCategoryButton extends StatelessWidget {
           children: [
             Positioned.fill(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: AppDecorations.borderRadiusDefault,
                 child: BackdropFilter(
                   filter: ImageFilter.blur(
                     sigmaX: 1.5,

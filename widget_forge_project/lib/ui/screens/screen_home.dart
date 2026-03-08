@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:widget_forge_project/ui/widgets/home_screen/home_card.dart';
 import 'package:widget_forge_project/ui/widgets/home_screen/item_categories_grid.dart';
+import 'package:widget_forge_project/ui/theme/app_decorations.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,8 +12,8 @@ class HomeScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 85),
         child: Column(
-          spacing: 12,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: AppDecorations.spacingMedium,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
 
             HomeScreenCard(),

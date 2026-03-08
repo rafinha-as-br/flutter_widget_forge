@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:widget_forge_project/ui/theme/app_decorations.dart';
 
 class HomeScreenCard extends StatelessWidget {
   const HomeScreenCard({super.key});
@@ -8,10 +9,10 @@ class HomeScreenCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
-          borderRadius: BorderRadius.circular(15)
+          borderRadius: AppDecorations.borderRadiusLarge
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 17),
+        padding: AppDecorations.paddingCard,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

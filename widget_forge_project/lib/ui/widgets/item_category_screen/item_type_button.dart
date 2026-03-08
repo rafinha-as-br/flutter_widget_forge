@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:widget_forge_project/data/entities/type.dart';
+import 'package:widget_forge_project/ui/theme/app_decorations.dart';
 
 import '../../../app/app_routes.dart';
 
@@ -20,11 +21,11 @@ class ItemTypeButton extends StatelessWidget {
       },
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        shape: RoundedRectangleBorder(borderRadius: AppDecorations.borderRadiusDefault),
       ),
       child: Ink(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: AppDecorations.borderRadiusDefault,
           image: DecorationImage(
             image: AssetImage(type.typeBackgroundImage ?? ''),
             fit: BoxFit.cover,
@@ -47,7 +48,7 @@ class _ItemTypeButtonContent extends StatelessWidget {
       children: [
         Positioned.fill(
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: AppDecorations.borderRadiusDefault,
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
               child: Container(color: Colors.black.withAlpha(105)),
@@ -59,7 +60,7 @@ class _ItemTypeButtonContent extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 color: Colors.black.withAlpha(130),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: AppDecorations.borderRadiusDefault,
               ),
               child: Padding(
                 padding: const EdgeInsets.all(20.0),

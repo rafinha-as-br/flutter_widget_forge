@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:widget_forge_project/data/entities/type.dart';
 import 'package:widget_forge_project/ui/widgets/items_screen/sliver_app_bar.dart';
 import 'package:widget_forge_project/ui/widgets/items_screen/item_display_wrapper.dart';
+import 'package:widget_forge_project/ui/theme/app_decorations.dart';
 
 class ItemsScreen extends StatelessWidget {
   const ItemsScreen({super.key, required this.itemType});
@@ -20,7 +21,7 @@ class ItemsScreen extends StatelessWidget {
                 final item = itemType.items[index];
 
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: AppDecorations.paddingDefault,
                   child: ItemDisplayWrapper(item: item),
                 );
               },
