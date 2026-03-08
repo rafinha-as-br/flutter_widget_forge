@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:widget_forge_project/data/entities/type.dart';
+import 'package:widget_forge_project/ui/theme/app_theme.dart';
 
 class ItemsScreenAppBar extends StatelessWidget {
   final ItemType type;
@@ -15,10 +16,10 @@ class ItemsScreenAppBar extends StatelessWidget {
       foregroundColor: Colors.white,
       title: Text(
         type.typeName,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w500,
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.onPrimary,
         ),
       ),
       centerTitle: true,
@@ -32,10 +33,10 @@ class ItemsScreenAppBar extends StatelessWidget {
                 fit: BoxFit.cover,
               )
             else
-              Container(color: Colors.grey[800]),
+              Container(color: Theme.of(context).colorScheme.primary),
             BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-              child: Container(color: Colors.black.withAlpha(110)),
+              child: Container(color: Theme.of(context).colorScheme.scrim.withAlpha(110)),
             ),
           ],
         ),
@@ -49,15 +50,15 @@ class ItemsScreenAppBar extends StatelessWidget {
           children: [
             Text(
               type.typeName,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onPrimary,
               ),
             ),
             Text(
               type.typeDescription,
-              style: const TextStyle(fontSize: 12, color: Colors.white),
+              style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onPrimary.withAlpha(200)),
               maxLines: 5,
               overflow: TextOverflow.ellipsis,
             ),
@@ -69,21 +70,31 @@ class ItemsScreenAppBar extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 18),
           child: Transform.scale(
             scale: 1.2,
-            child: Switch(
-              value: false,
-
-              /// todo: replace the value for a bool checker (aka: Theme of context is dark? true : false,)
-              onChanged: (value) {
-                /// todo: call toggle theme method here
-              },
-
-              /// todo: replace the background color of the Icon as transparent
-              thumbIcon: WidgetStateProperty.resolveWith<Icon?>((states) {
-                if (states.contains(WidgetState.selected)) {
-                  return const Icon(Icons.dark_mode, size: 16);
-                }
-                return const Icon(Icons.light_mode, size: 16);
-              }),
+            child: ValueListenableBuilder<ThemeMode>(
+              valueListenable: AppThemeController.instance.themeModeNotifier,
+              builder: (context, themeMode, _) {
+                final isDark = themeMode == ThemeMode.dark || 
+                    (themeMode == ThemeMode.system && MediaQuery.platformBrightnessOf(context) == Brightness.dark);
+                
+                return Switch(
+                  value: isDark,
+                  onChanged: (value) {
+                    AppThemeController.instance.toggleThemeMode();
+                  },
+                  thumbIcon: WidgetStateProperty.resolveWith<Icon?>((states) {
+                    if (states.contains(WidgetState.selected)) {
+                      return const Icon(Icons.dark_mode, size: 16, color: Colors.black87);
+                    }
+                    return const Icon(Icons.light_mode, size: 16, color: Colors.white );
+                  }),
+                  trackColor: WidgetStateProperty.resolveWith<Color?>((states) {
+                     if (states.contains(WidgetState.selected)) {
+                        return Colors.grey[800];
+                     }
+                     return Colors.grey[300];
+                  }),
+                );
+              }
             ),
           ),
         ),

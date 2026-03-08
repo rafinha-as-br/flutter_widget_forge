@@ -8,11 +8,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 85),
         child: Column(
-          spacing: 25,
+          spacing: 12,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 

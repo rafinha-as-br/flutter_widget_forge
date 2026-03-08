@@ -4,6 +4,10 @@ import 'package:widget_forge_project/ui/widgets/item_category_screen/item_catego
 
 import '../widgets/item_category_screen/item_type_button.dart';
 
+/* Todo: Update the AppBar and remove the origin AppBar because is too ugly,
+*   add a manual button to return to the home screen.
+* */
+
 class ItemCategoryScreen extends StatelessWidget {
   const ItemCategoryScreen({super.key, required this.category});
 

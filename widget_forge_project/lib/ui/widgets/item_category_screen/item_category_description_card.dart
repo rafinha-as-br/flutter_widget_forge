@@ -10,7 +10,7 @@ class ItemCategoryDescriptionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.black12,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(15)
       ),
       child: Padding(

@@ -21,7 +21,7 @@ class ButtonDisplayerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.black12,
+          color: Theme.of(context).colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(12)
       ),
       child: Padding(
@@ -77,7 +77,8 @@ class _ShowButtonCardHeader extends StatelessWidget {
               buttonName,
               style: TextStyle(
                   fontSize: 20,
-                  fontWeight: FontWeight.w500
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
 
@@ -92,6 +93,7 @@ class _ShowButtonCardHeader extends StatelessWidget {
           buttonDescription,
           style: TextStyle(
             fontSize: 16,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
         ),
 
@@ -152,13 +154,13 @@ class _StateButtonsState extends State<_StateButtons> {
           children: [
 
             /// normal ButtonState
-            _radioButton(_ButtonState.normal, Icons.check),
+            _radioButton(_ButtonState.normal, Icons.check, context),
 
             /// pressed ButtonState
-            _radioButton(_ButtonState.pressed, Icons.touch_app_outlined),
+            _radioButton(_ButtonState.pressed, Icons.touch_app_outlined, context),
 
             /// Disabled ButtonState
-            _radioButton(_ButtonState.disabled, Icons.do_not_touch)
+            _radioButton(_ButtonState.disabled, Icons.do_not_touch, context)
 
 
           ],
@@ -166,7 +168,7 @@ class _StateButtonsState extends State<_StateButtons> {
   }
 
 
-  Widget _radioButton(_ButtonState state, IconData icon){
+  Widget _radioButton(_ButtonState state, IconData icon, BuildContext context){
     return Stack(
       children: [
         Positioned(
@@ -177,7 +179,10 @@ class _StateButtonsState extends State<_StateButtons> {
             child: Icon(
               icon,
               size: 20,
-              color: buttonState == state? Colors.white : Colors.black12,
+              color: buttonState == state ?
+              Theme.of(context).colorScheme.primary
+                :
+              Theme.of(context).colorScheme.onSurface.withAlpha(100),
             )
         ),
         Transform.scale(
@@ -188,8 +193,8 @@ class _StateButtonsState extends State<_StateButtons> {
             fillColor: WidgetStateProperty<Color?>.fromMap(
                 <WidgetStatesConstraint, Color?>
                 {
-                  WidgetState.selected: Colors.white,
-                  WidgetState.any: Colors.black12,
+                  WidgetState.selected: Theme.of(context).colorScheme.primary,
+                  WidgetState.any: Theme.of(context).colorScheme.onSurface.withAlpha(30),
                 }
             ),
 
