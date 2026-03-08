@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:widget_forge_project/data/widget_menu.dart';
 import 'package:widget_forge_project/ui/widgets/home_screen/home_card.dart';
-import 'package:widget_forge_project/ui/widgets/home_screen/widget_categories_grid.dart';
-
-import '../widgets/home_screen/widget_categories_button.dart';
+import 'package:widget_forge_project/ui/widgets/home_screen/item_categories_grid.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,7 +19,7 @@ class HomeScreen extends StatelessWidget {
             HomeScreenCard(),
 
             Expanded(
-              child: WidgetCategoriesGrid(),
+              child: ItemCategoriesGrid(),
             )
 
           ],

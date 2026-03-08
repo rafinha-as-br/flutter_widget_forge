@@ -5,8 +5,8 @@ import 'package:widget_forge_project/data/entities/category.dart';
 
 import '../../../app/app_routes.dart';
 
-class WidgetCategoryButton extends StatelessWidget {
-  const WidgetCategoryButton({super.key, required this.category,});
+class ItemCategoryButton extends StatelessWidget {
+  const ItemCategoryButton({super.key, required this.category,});
 
   final ItemCategory category;
 
@@ -15,7 +15,7 @@ class WidgetCategoryButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         Navigator.of(context).pushNamed(
-            AppRoutes.widgetCategoryScreen,
+            AppRoutes.itemCategoryScreen,
           arguments: category
         );
       },
@@ -59,7 +59,7 @@ class WidgetCategoryButton extends StatelessWidget {
 
                 Icon(
                   category.categoryIcon,
-                  size: 70, /// todo: lower the size a bit...
+                  size: 50,
                   color: Colors.white,
                 ),
                 Text(

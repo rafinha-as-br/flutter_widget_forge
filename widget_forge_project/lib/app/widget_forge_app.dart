@@ -10,7 +10,6 @@ class WidgetForgeApp extends StatelessWidget {
       title: 'Widget Forge App',
       initialRoute: AppRoutes.homeScreen,
       onGenerateRoute: (route) => AppRoutes.fromRoute(route),
-
     );
   }
 }

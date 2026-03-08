@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class WidgetCategoryDescriptionCard extends StatelessWidget {
-  const WidgetCategoryDescriptionCard({super.key, required this.name, required this.description});
+class ItemCategoryDescriptionCard extends StatelessWidget {
+  const ItemCategoryDescriptionCard({super.key, required this.name, required this.description});
 
   final String name;
   final String description;
@@ -19,7 +19,7 @@ class WidgetCategoryDescriptionCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'Buttons',
+              name,
               style: TextStyle(
                   fontSize: 33,
                   fontWeight: FontWeight.w700

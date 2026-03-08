@@ -1,13 +1,12 @@
 /* this file contains the routes for the app */
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_forge_project/data/entities/category.dart';
-import 'package:widget_forge_project/data/entities/item.dart';
-import 'package:widget_forge_project/ui/screens/screen_widgets.dart';
+import 'package:widget_forge_project/data/entities/type.dart';
+import 'package:widget_forge_project/ui/screens/screen_items.dart';
 
 import '../ui/screens/screen_home.dart';
-import '../ui/screens/screen_widget_category.dart';
+import '../ui/screens/screen_item_category.dart';
 
 
 abstract class AppRoutes {
@@ -16,10 +15,10 @@ abstract class AppRoutes {
   static const homeScreen = '/';
 
   /// widget category screen
-  static const widgetCategoryScreen = '/widgetCategScreen';
+  static const itemCategoryScreen = '/itemCategScreen';
 
   /// widget screen
-  static const widgetsScreen = '/widgetsScreen';
+  static const itemsScreen = '/itemsScreen';
 
 
   /// route mapper
@@ -30,19 +29,19 @@ abstract class AppRoutes {
           settings: settings,
             builder: (_) => const HomeScreen()
         );
-      case widgetCategoryScreen:
+      case itemCategoryScreen:
         final category = settings.arguments as ItemCategory;
 
         return MaterialPageRoute(
             settings: settings,
-            builder: (_) => WidgetCategoryScreen(category: category,)
+            builder: (_) => ItemCategoryScreen(category: category,)
         );
-      case widgetsScreen:
-        final itemsList = settings.arguments as List<Item>;
+      case itemsScreen:
+        final itemType = settings.arguments as ItemType;
 
         return MaterialPageRoute(
             settings: settings,
-            builder: (_) => WidgetsScreen(itemsList: itemsList,)
+            builder: (_) => ItemsScreen(itemType: itemType,)
         );
 
       default: throw UnsupportedError('UnkownRoute: ${settings.name}');

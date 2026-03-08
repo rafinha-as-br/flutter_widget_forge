@@ -1,9 +1,10 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:widget_forge_project/data/entities/type.dart';
 
-class WidgetsScreenAppBar extends StatelessWidget {
-  const WidgetsScreenAppBar({super.key});
+class ItemsScreenAppBar extends StatelessWidget {
+  final ItemType type;
+  const ItemsScreenAppBar({super.key, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -13,15 +14,11 @@ class WidgetsScreenAppBar extends StatelessWidget {
       backgroundColor: Colors.transparent,
       foregroundColor: Colors.white,
       title: Text(
-        'Visualizar widgets',
-
-        /// todo: Maybe think about a better title....
-
-
-        style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w500,
-            color: Colors.white
+        type.typeName,
+        style: const TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+          color: Colors.white,
         ),
       ),
       centerTitle: true,
@@ -29,18 +26,16 @@ class WidgetsScreenAppBar extends StatelessWidget {
         background: Stack(
           fit: StackFit.expand,
           children: [
-            Image.asset(
-              'assets/images/buttons_background.jpg',
-
-              /// todo: Replace for a external variable (maybe an entity that has the image, name and widget lists?
-
-              fit: BoxFit.cover,
-            ),
+            if (type.typeBackgroundImage != null)
+              Image.asset(
+                type.typeBackgroundImage!,
+                fit: BoxFit.cover,
+              )
+            else
+              Container(color: Colors.grey[800]),
             BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-              child: Container(
-                color: Colors.black.withAlpha(110),
-              ),
+              child: Container(color: Colors.black.withAlpha(110)),
             ),
           ],
         ),
@@ -53,28 +48,16 @@ class WidgetsScreenAppBar extends StatelessWidget {
           spacing: 5,
           children: [
             Text(
-              'Solid Buttons',
-
-              /// Todo: Replace for external variable (name)
-
-
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white
+              type.typeName,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
               ),
             ),
             Text(
-              'Botões com fundo sólido, ideal para ações primárias',
-
-              /// TODO: Replace for external variable (description)
-
-
-
-              style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.white
-              ),
+              type.typeDescription,
+              style: const TextStyle(fontSize: 12, color: Colors.white),
               maxLines: 5,
               overflow: TextOverflow.ellipsis,
             ),
@@ -90,24 +73,17 @@ class WidgetsScreenAppBar extends StatelessWidget {
               value: false,
 
               /// todo: replace the value for a bool checker (aka: Theme of context is dark? true : false,)
-
               onChanged: (value) {
-
                 /// todo: call toggle theme method here
-
               },
 
               /// todo: replace the background color of the Icon as transparent
-
-
-              thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
-                    (states) {
-                  if (states.contains(WidgetState.selected)) {
-                    return const Icon(Icons.dark_mode, size: 16);
-                  }
-                  return const Icon(Icons.light_mode, size: 16);
-                },
-              ),
+              thumbIcon: WidgetStateProperty.resolveWith<Icon?>((states) {
+                if (states.contains(WidgetState.selected)) {
+                  return const Icon(Icons.dark_mode, size: 16);
+                }
+                return const Icon(Icons.light_mode, size: 16);
+              }),
             ),
           ),
         ),

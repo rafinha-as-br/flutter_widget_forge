@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:widget_forge_project/data/display/button_display.dart';
 import 'package:widget_forge_project/data/entities/item.dart';
 
 class TestButton extends StatefulWidget implements ButtonItem{
@@ -19,7 +18,6 @@ class TestButton extends StatefulWidget implements ButtonItem{
 
 
   @override
-  // TODO: implement buttonController
   WidgetStatesController get buttonController => _controller;
 
 }
@@ -33,12 +31,7 @@ class _TestButtonState extends State<TestButton> {
 
   @override
   Widget build(BuildContext context) {
-    return ButtonDisplayerCard(
-        buttonName: widget.itemName,
-        buttonDescription: widget.description,
-        buttonController: widget.buttonController,
-        buttonWidget: _Button(buttonController: widget.buttonController),
-    );
+    return _Button(buttonController: widget.buttonController);
   }
 
 
